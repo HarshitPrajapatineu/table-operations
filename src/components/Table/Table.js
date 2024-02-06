@@ -4,7 +4,20 @@ import styles from './Table.module.css';
 
 const Table = () => (
   <div className={styles.Table}>
-    Table Component
+    <table>
+
+    <tr>
+        <th>
+          Appdawdawd
+        </th>
+      </tr>
+
+      <tr>
+        <td>
+          csaddawdaw
+        </td>
+      </tr>
+    </table>
   </div>
 );
 

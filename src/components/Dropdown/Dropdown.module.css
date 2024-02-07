@@ -1,1 +1,8 @@
-.Dropdown {}
+.Dropdown {padding: 4px;}
+
+select {
+    background-color: #282c34;
+    border-radius: 4px;
+    color: white;
+    height: 28px;
+}

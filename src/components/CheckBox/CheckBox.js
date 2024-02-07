@@ -4,7 +4,7 @@ import styles from './CheckBox.module.css';
 
 const CheckBox = () => (
   <div className={styles.CheckBox}>
-    CheckBox Component
+    <input type='checkbox'></input>
   </div>
 );
 

@@ -1,1 +1,5 @@
-.CheckBox {}
+.CheckBox {padding: 4px;}
+
+input {
+    background-color: #282c34;
+}

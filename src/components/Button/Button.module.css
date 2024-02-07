@@ -1,1 +1,7 @@
-.Button {}
+.Button {
+    align-items: center;
+}
+
+.baseButton {
+    color: white;
+}

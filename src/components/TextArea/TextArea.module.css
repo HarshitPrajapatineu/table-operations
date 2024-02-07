@@ -1,1 +1,7 @@
-.TextArea {}
+.TextArea {padding: 4px;}
+
+textarea {
+    background-color: #282c34;
+    border-radius: 4px;
+    color: white;
+}

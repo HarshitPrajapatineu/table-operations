@@ -1,1 +1,30 @@
-.Table {}
+.Table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(13px);
+    color: white;
+}
+
+tr {
+    width: 100vh;
+}
+
+table {
+    box-sizing: border-box;
+    width: 100vw;
+    background-color: #282c34;
+    border: #282c34 solid 1px;
+}
+
+thead {
+    box-sizing: border-box;
+    border: #282c34 solid 1px;
+    background-color: #282c34;
+}
+
+tbody {
+    border: #282c34 solid 1px;
+    background-color: #69748b;
+}

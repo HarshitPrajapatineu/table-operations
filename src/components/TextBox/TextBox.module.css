@@ -1,1 +1,8 @@
-.TextBox {}
+.TextBox {padding: 4px;}
+
+input {
+    background-color: #282c34;
+    border-radius: 4px;
+    color: white;
+    height: 24px;
+}

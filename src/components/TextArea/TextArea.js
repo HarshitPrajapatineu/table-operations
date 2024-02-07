@@ -4,7 +4,7 @@ import styles from './TextArea.module.css';
 
 const TextArea = () => (
   <div className={styles.TextArea}>
-    TextArea Component
+    <textarea/>
   </div>
 );
 

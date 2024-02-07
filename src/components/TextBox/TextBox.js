@@ -4,7 +4,7 @@ import styles from './TextBox.module.css';
 
 const TextBox = () => (
   <div className={styles.TextBox}>
-    TextBox Component
+    <input type='text'/>
   </div>
 );
 

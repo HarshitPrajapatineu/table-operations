@@ -1,1 +1,10 @@
-.RadioButton {}
+.RadioButton {width: 60px;}
+
+input[type="radio"] {
+    vertical-align: bottom;
+    height: 16px;
+  }
+
+  span {
+    font-size: 14px;
+  }

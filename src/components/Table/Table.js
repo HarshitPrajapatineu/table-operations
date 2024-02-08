@@ -10,6 +10,7 @@ import Dropdown from './../Dropdown/Dropdown'
 
 
 
+let idCounter = 0;
 
 
 const Table = () => {
@@ -23,11 +24,14 @@ const Table = () => {
   let [selectedRowList, setSelectedRowList] = useState([]);
 
   const addNewRow = () => {
-    const newId = tableDataList.length;
+    const newId = idCounter++;
 
     const tableData = {
       id: newId,
       name: '',
+      email: '',
+      phonenumber: '',
+      experience: '',
       description: '',
       language: '',
       isActive: 'false'
@@ -51,9 +55,9 @@ const Table = () => {
     // }
   };
 
-  const handleDeleteClick = (rowId, updatedRowData) => {
+  const handleDeleteClick = (rowId) => {
 
-    setTableDataList(tableDataList.filter(item => item.id !== rowId))
+    setTableDataList((arr) => arr.filter(item => item.id !== rowId))
     setEditRowId(null);
 
   };
@@ -63,16 +67,12 @@ const Table = () => {
   };
 
   const deleteSelectedRow = (e) => {
-    // if (Object.keys(errors).length === 0) {
     selectedRowList.forEach((val) => {
       console.log(selectedRowList);
-      setTableDataList(tableDataList.filter(item => item.id !== val))
-      setSelectedRowList(selectedRowList.filter(item => item !== val));
+      handleDeleteClick(val);
+      setSelectedRowList((arr) => arr.filter(item => item !== val));
     })
     setEditRowId(null);
-
-    // } else {
-    // }
   };
 
   return (
@@ -91,8 +91,10 @@ const Table = () => {
             }
           </tr>
         </thead>
+
         {/* create body */}
         <tbody>
+
           {/* loop */}
           {
             tableDataList.map(row => {
@@ -113,7 +115,7 @@ const Table = () => {
                   <td>
                     {
                       row.id === editRowId ?
-                        (<TextBox value={row.name}
+                        (<TextBox value={row.name} 
                           onChange={(newValue) => { row.name = newValue }} />) :
                         (<span className='input'>{row.name}</span>)
                     }  </td>
@@ -122,9 +124,9 @@ const Table = () => {
                   <td>
                     {
                       row.id === editRowId ?
-                        (<TextBox value={row.username}
-                          onChange={(newValue) => { row.username = newValue }} />) :
-                        (<span className='input'>{row.username}</span>)
+                        (<TextBox value={row.email}
+                          onChange={(newValue) => { row.email = newValue }} />) :
+                        (<span className='input'>{row.email}</span>)
                     }  </td>
 
                   {/* {TextBox} */}
@@ -186,6 +188,8 @@ const Table = () => {
 
                   {/* {Action} */}
                   <td>
+
+                    {/* Edit/Save Button */}
                     <Button
                       id={row.id}
                       border="none"
@@ -197,6 +201,7 @@ const Table = () => {
                       textColor="white"
                       text={row.id === editRowId ? "Save" : "Edit"} />
 
+                    {/* Delete Button */}
                     <Button
                       id={row.id}
                       border="none"

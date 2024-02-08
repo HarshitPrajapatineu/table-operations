@@ -7,10 +7,8 @@ const RadioButton = ({
   valueList,
   isDisabled,
   value,
-  checked,
   onSelectionChange
 }) => {
-  console.log("v:  ----" + value);
   let [inputValue, setInputValue] = useState(value);
   return (
   <div className={styles.RadioButton}>
@@ -23,15 +21,12 @@ const RadioButton = ({
             name={name}
             key={v.toString()}
             onChange ={(e) => {
-              console.log(v, value, v === inputValue);
               setInputValue(e.target.value.toString());
               onSelectionChange(e.target.value.toString());
-              // console.log(e.target.value.toString());
-              // console.log(inputValue);
               
             }}
             checked={v === inputValue.toString()}
-             />{v.toString()}
+             /><span>{v.toString().toUpperCase()}</span>
         </>
       ))
     }

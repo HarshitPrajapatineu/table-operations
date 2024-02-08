@@ -2,31 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button= ({ 
+const Button = ({
+  id,
   border,
   color,
   children,
   height,
-  onClick, 
+  onClick,
   radius,
   width,
   text,
-  textColor
-}) => { 
-return (
-  <div className={styles.Button}>
-    <button onClick={onClick} 
-      style={{
-         backgroundColor: color,
-         border,
-         borderRadius: radius,
-         height,
-         width,
-         fontWeight: "bold",
-         color: textColor
-      }}>{text}</button>
-  </div>
-)};
+  textColor,
+  isDisabled
+}) => {
+  return (
+    <div className={styles.Button}>
+      <button id={'button-' + id}
+        onClick={onClick}
+        disabled={isDisabled}
+        className={styles.cp}
+        style={{
+          backgroundColor: color,
+          border,
+          borderRadius: radius,
+          height,
+          width,
+          fontWeight: "bold",
+          color: textColor
+        }}>{text}</button>
+    </div>
+  )
+};
 
 Button.propTypes = {};
 

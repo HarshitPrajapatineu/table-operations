@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './CheckBox.module.css';
 
-const CheckBox = () => (
+const CheckBox = ({id, onChange}) => (
   <div className={styles.CheckBox}>
-    <input type='checkbox'></input>
+    <input 
+    id={id} 
+    type='checkbox'
+    onChange={(e) => {
+      onChange(e.target.checked);
+    }}
+    ></input>
   </div>
 );
 

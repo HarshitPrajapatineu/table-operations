@@ -9,6 +9,25 @@
 
 tr {
     width: 100vh;
+    height: 48px;
+}
+
+td:last-child {
+    max-width: 170px;
+    width: 200px;
+}
+td {
+    /* width: calc(100vh/10); */
+    min-width: 40px;
+
+}
+
+.input {
+    background-color: #282c34;
+    border-radius: 4px;
+    color: white;
+    height: 24px;
+    width: 200px;
 }
 
 table {
@@ -27,4 +46,8 @@ thead {
 tbody {
     border: #282c34 solid 1px;
     background-color: #69748b;
+}
+
+.flex {
+    display: inline-flex;
 }

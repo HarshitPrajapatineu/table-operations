@@ -5,7 +5,8 @@ import styles from './Dropdown.module.css';
 const Dropdown = ({
   id,
   name,
-  dropDownList
+  dropDownList,
+  isDisabled
 }) => {
   const [ddList, setDdList] = useState(dropDownList);
 
@@ -20,12 +21,10 @@ const Dropdown = ({
           );
         })}
       </select> */}
-      <select name={name} id={id}>
-        {
-          console.log(dropDownList)}
+      <select name={name} id={id} disabled={isDisabled} >
         {
           ddList.map(item => (
-            <option >{item}</option>
+            <option id={'option-' + id}>{item}</option>
           ))}
       </select>
     </div>

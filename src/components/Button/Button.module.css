@@ -1,5 +1,13 @@
 .Button {
     align-items: center;
+    box-sizing: border-box;
+    display: inline flex;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.cp {
+    cursor: pointer;
 }
 
 .baseButton {

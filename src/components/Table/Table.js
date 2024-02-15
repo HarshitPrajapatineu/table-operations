@@ -22,6 +22,7 @@ const Table = () => {
   let [editRowId, setEditRowId] = React.useState(null);
   let [tableDataList, setTableDataList] = useState([]);
   let [selectedRowList, setSelectedRowList] = useState([]);
+  
 
   const addNewRow = () => {
     const newId = idCounter++;
@@ -34,6 +35,7 @@ const Table = () => {
       experience: '',
       description: '',
       language: '',
+      isChecked: false,
       isActive: 'false'
     }
     setTableDataList([...tableDataList, tableData]);
@@ -43,8 +45,6 @@ const Table = () => {
   const handleEditClick = (e) => {
     const id = parseInt(e.target.id.substring(7, e.target.id.length));
     setEditRowId(id);
-
-
   };
 
   const handleSaveClick = (rowId, updatedRowData) => {
@@ -70,8 +70,9 @@ const Table = () => {
     selectedRowList.forEach((val) => {
       console.log(selectedRowList);
       handleDeleteClick(val);
-      setSelectedRowList((arr) => arr.filter(item => item !== val));
+      // setSelectedRowList((arr) => arr.filter(item => item !== val));
     })
+    setSelectedRowList([])
     setEditRowId(null);
   };
 
@@ -100,22 +101,26 @@ const Table = () => {
             tableDataList.map(row => {
               return (
                 <tr>
-                  <td>
+                  <td className={styles.width30}>
                     {row.id + 1}
                   </td>
 
                   {/* {Checkbox} */}
-                  <td>
-                    <CheckBox id={row.id} onChange={(isChecked) => {
-                      handleRowSelect(row.id, isChecked)
-                    }} />
+                  <td className={styles.width30}>
+                    <CheckBox
+                      isChecked={row.isChecked}
+                      id={row.id}
+                      onSelectChange={(isChecked) => {
+                        handleRowSelect(row.id, isChecked);
+                        row.isChecked = isChecked;
+                      }} />
                   </td>
 
                   {/* {TextBox} */}
                   <td>
                     {
                       row.id === editRowId ?
-                        (<TextBox value={row.name} 
+                        (<TextBox value={row.name}
                           onChange={(newValue) => { row.name = newValue }} />) :
                         (<span className='input'>{row.name}</span>)
                     }  </td>
@@ -158,7 +163,7 @@ const Table = () => {
                   </td>
 
                   {/* {Dropdown} */}
-                  <td>
+                  <td className={styles.width100}>
                     {
                       <Dropdown id={"dd-" + row.id}
                         name={'dd'}
@@ -181,7 +186,7 @@ const Table = () => {
                           onSelectionChange={(newValue) => { row.isActive = newValue; console.log(row) }}
                         />
                         ) :
-                        (<span>{row.isActive}</span>)
+                        (<span>{row.isActive.toUpperCase()}</span>)
                     }
 
                   </td>
@@ -210,7 +215,7 @@ const Table = () => {
                       height="28px"
                       onClick={(e) => { handleDeleteClick(row.id) }}
                       width="60px"
-                      textColor="white"
+                      textColor="rgb(245 51 51)"
                       text="Delete" />
                   </td>
                 </tr>
@@ -239,7 +244,7 @@ const Table = () => {
                 height="28px"
                 onClick={(e) => { if (selectedRowList.length > 0) deleteSelectedRow(e) }}
                 width="200px"
-                textColor="white"
+                textColor={!selectedRowList.length > 0 ? "rgb(163 152 152)" : "rgb(245 51 51)"}
                 text="Delete Data"
                 isDisabled={!selectedRowList.length > 0} />
             </td>

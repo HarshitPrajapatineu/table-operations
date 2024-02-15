@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Table.module.css';
 import CheckBox from './../CheckBox/CheckBox'
@@ -7,6 +7,7 @@ import RadioButton from './../RadioButton/RadioButton'
 import TextBox from './../TextBox/TextBox'
 import TextArea from './../TextArea/TextArea'
 import Dropdown from './../Dropdown/Dropdown'
+import { TableContext } from '../../services/TableContext';
 
 
 
@@ -20,25 +21,13 @@ const Table = () => {
   const valueList = ['true', 'false'];
 
   let [editRowId, setEditRowId] = React.useState(null);
-  let [tableDataList, setTableDataList] = useState([]);
+  let [tableDataList, createTableRow, updateTableDataList, deleteTableDataList] = useContext(TableContext);
   let [selectedRowList, setSelectedRowList] = useState([]);
   
 
   const addNewRow = () => {
     const newId = idCounter++;
-
-    const tableData = {
-      id: newId,
-      name: '',
-      email: '',
-      phonenumber: '',
-      experience: '',
-      description: '',
-      language: '',
-      isChecked: false,
-      isActive: 'false'
-    }
-    setTableDataList([...tableDataList, tableData]);
+    createTableRow(newId);
     setEditRowId(newId);
   }
 
@@ -56,8 +45,7 @@ const Table = () => {
   };
 
   const handleDeleteClick = (rowId) => {
-
-    setTableDataList((arr) => arr.filter(item => item.id !== rowId))
+    deleteTableDataList(rowId);
     setEditRowId(null);
 
   };
@@ -121,7 +109,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.name}
-                          onChange={(newValue) => { row.name = newValue }} />) :
+                          onChange={(newValue) =>  updateTableDataList(row.id, 'name', newValue) } />) :
                         (<span className='input'>{row.name}</span>)
                     }  </td>
 

@@ -12,7 +12,7 @@ export const TableProvider = ({ children }) => {
             let row = arr.find(item => item.id === id);
             console.log(row)
             row[field] = newValue;
-            return arr;
+            return [...arr];
 
         })
     });
@@ -36,7 +36,7 @@ export const TableProvider = ({ children }) => {
 
     const deleteTableDataList = ((id) => {
         setTableDataList((arr) => {
-            arr.filter(item => item.id !== id)
+            return arr.filter(item => item.id !== id)
         })
     });
 

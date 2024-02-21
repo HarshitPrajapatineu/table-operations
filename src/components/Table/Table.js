@@ -100,7 +100,7 @@ const Table = () => {
                       id={row.id}
                       onSelectChange={(isChecked) => {
                         handleRowSelect(row.id, isChecked);
-                        row.isChecked = isChecked;
+                        updateTableDataList(row.id, 'isChecked', isChecked)
                       }} />
                   </td>
 
@@ -118,7 +118,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.email}
-                          onChange={(newValue) => { row.email = newValue }} />) :
+                          onChange={(newValue) => updateTableDataList(row.id, 'email', newValue)} />) :
                         (<span className='input'>{row.email}</span>)
                     }  </td>
 
@@ -127,7 +127,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.phonenumber}
-                          onChange={(newValue) => { row.phonenumber = newValue }} />) :
+                          onChange={(newValue) => updateTableDataList(row.id, 'phonenumber', newValue)} />) :
                         (<span className='input'>{row.phonenumber}</span>)
                     }  </td>
 
@@ -136,7 +136,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.experience}
-                          onChange={(newValue) => { row.experience = newValue }} />) :
+                          onChange={(newValue) => updateTableDataList(row.id, 'experience', newValue)} />) :
                         (<span className='input'>{row.experience}</span>)
                     }  </td>
 
@@ -145,7 +145,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextArea value={row.description}
-                          onChange={(newValue) => { row.description = newValue }} />) :
+                          onChange={(newValue) => updateTableDataList(row.id, 'description', newValue)} />) :
                         (<span>{row.description}</span>)
                     }
                   </td>
@@ -158,6 +158,7 @@ const Table = () => {
                         dropDownList={languageList}
                         isDisabled={!(row.id === editRowId)}
                         value={row.language}
+                        onSelectChange={(newValue) => updateTableDataList(row.id, 'language', newValue)}
                       />
                     }
                   </td>
@@ -171,7 +172,7 @@ const Table = () => {
                           valueList={valueList}
                           value={row.isActive.toString()}
                           isDisabled={!(row.id === editRowId)}
-                          onSelectionChange={(newValue) => { row.isActive = newValue; console.log(row) }}
+                          onSelectionChange={(newValue) => updateTableDataList(row.id, 'isActive', newValue)}
                         />
                         ) :
                         (<span>{row.isActive.toUpperCase()}</span>)

@@ -5,8 +5,10 @@ import styles from './Dropdown.module.css';
 const Dropdown = ({
   id,
   name,
+  value,
   dropDownList,
-  isDisabled
+  isDisabled,
+  onSelectChange
 }) => {
   const [ddList, setDdList] = useState(dropDownList);
 
@@ -21,10 +23,10 @@ const Dropdown = ({
           );
         })}
       </select> */}
-      <select name={name} id={id} disabled={isDisabled} >
+      <select name={name} id={id} disabled={isDisabled} value={value} onChange={(e) => onSelectChange(e.target.value)} >
         {
-          ddList.map(item => (
-            <option id={'option-' + id}>{item}</option>
+          ddList.map((item,i) => (
+            <option key={i} id={'option-' + id}  >{item} </option>
           ))}
       </select>
     </div>

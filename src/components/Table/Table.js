@@ -21,14 +21,18 @@ const Table = () => {
   const valueList = ['true', 'false'];
 
   let [editRowId, setEditRowId] = React.useState(null);
-  let [tableDataList, createTableRow, updateTableDataList, deleteTableDataList] = useContext(TableContext);
+  let [tableDataList, dispatch] = useContext(TableContext);
   let [selectedRowList, setSelectedRowList] = useState([]);
-  
+
 
   const addNewRow = () => {
     const newId = idCounter++;
-    createTableRow(newId);
     setEditRowId(newId);
+    dispatch({
+      type: "AddRow",
+      payload: newId
+    });
+    // createTableRow(newId);
   }
 
   const handleEditClick = (e) => {
@@ -45,8 +49,12 @@ const Table = () => {
   };
 
   const handleDeleteClick = (rowId) => {
-    deleteTableDataList(rowId);
+    // deleteTableDataList(rowId);
     setEditRowId(null);
+    dispatch({
+      type: "DeleteRow",
+      payload: rowId
+    });
 
   };
 
@@ -57,7 +65,10 @@ const Table = () => {
   const deleteSelectedRow = (e) => {
     selectedRowList.forEach((val) => {
       console.log(selectedRowList);
-      handleDeleteClick(val);
+      dispatch({
+        type: "DeleteRow",
+        payload: val
+      });
       // setSelectedRowList((arr) => arr.filter(item => item !== val));
     })
     setSelectedRowList([])
@@ -100,7 +111,7 @@ const Table = () => {
                       id={row.id}
                       onSelectChange={(isChecked) => {
                         handleRowSelect(row.id, isChecked);
-                        updateTableDataList(row.id, 'isChecked', isChecked)
+                        dispatch({ type: "SaveRow", payload: { id: row.id, field: 'isChecked', newValue: isChecked } })
                       }} />
                   </td>
 
@@ -109,7 +120,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.name}
-                          onChange={(newValue) =>  updateTableDataList(row.id, 'name', newValue) } />) :
+                          onChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'name', newValue: newValue } })} />) :
                         (<span className='input'>{row.name}</span>)
                     }  </td>
 
@@ -118,7 +129,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.email}
-                          onChange={(newValue) => updateTableDataList(row.id, 'email', newValue)} />) :
+                          onChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'email', newValue: newValue } })} />) :
                         (<span className='input'>{row.email}</span>)
                     }  </td>
 
@@ -127,7 +138,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.phonenumber}
-                          onChange={(newValue) => updateTableDataList(row.id, 'phonenumber', newValue)} />) :
+                          onChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'phonenumber', newValue: newValue } })} />) :
                         (<span className='input'>{row.phonenumber}</span>)
                     }  </td>
 
@@ -136,7 +147,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextBox value={row.experience}
-                          onChange={(newValue) => updateTableDataList(row.id, 'experience', newValue)} />) :
+                          onChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'experience', newValue: newValue } })} />) :
                         (<span className='input'>{row.experience}</span>)
                     }  </td>
 
@@ -145,7 +156,7 @@ const Table = () => {
                     {
                       row.id === editRowId ?
                         (<TextArea value={row.description}
-                          onChange={(newValue) => updateTableDataList(row.id, 'description', newValue)} />) :
+                          onChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'description', newValue: newValue } })} />) :
                         (<span>{row.description}</span>)
                     }
                   </td>
@@ -158,7 +169,7 @@ const Table = () => {
                         dropDownList={languageList}
                         isDisabled={!(row.id === editRowId)}
                         value={row.language}
-                        onSelectChange={(newValue) => updateTableDataList(row.id, 'language', newValue)}
+                        onSelectChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'language', newValue: newValue } })}
                       />
                     }
                   </td>
@@ -172,7 +183,7 @@ const Table = () => {
                           valueList={valueList}
                           value={row.isActive.toString()}
                           isDisabled={!(row.id === editRowId)}
-                          onSelectionChange={(newValue) => updateTableDataList(row.id, 'isActive', newValue)}
+                          onSelectionChange={(newValue) => dispatch({ type: "SaveRow", payload: { id: row.id, field: 'isActive', newValue: newValue } })}
                         />
                         ) :
                         (<span>{row.isActive.toUpperCase()}</span>)
